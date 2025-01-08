@@ -4,23 +4,26 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Builder;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class RedditViewBuilder implements Builder<Region> {
     private final RedditModel model;
-    private final RedditInteractor interactor;
+    private final Consumer<Runnable> downloadTaskConsumer;
 
-    public RedditViewBuilder (RedditModel model, RedditInteractor interactor) {
+
+
+    public RedditViewBuilder (RedditModel model, Consumer<Runnable> downloadTaskConsumer) {
         this.model = model;
-        this.interactor = interactor;
+        this.downloadTaskConsumer = downloadTaskConsumer;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class RedditViewBuilder implements Builder<Region> {
     }
 
     private Parent createContent() {
-        VBox results = new VBox(20, createInputRow(), createFileDirRow());
+        VBox results = new VBox(20, createInputRow(), createOutputLabel(), createFileDirRow());
         results.setAlignment(Pos.CENTER);
         results.getStylesheets().add(Objects.requireNonNull(this.getClass()
                 .getResource("/com/redditapp/redditdownloader/css/buttonStyle.css"))
@@ -70,7 +73,8 @@ public class RedditViewBuilder implements Builder<Region> {
         Button button = new Button("Download");
         button.getStyleClass().add("prefWidth-button");
         button.setOnAction(event -> {
-            //startProcess();
+            button.setDisable(true);
+            downloadTaskConsumer.accept(() -> button.setDisable(false));
         });
         return button;
     }
@@ -81,5 +85,12 @@ public class RedditViewBuilder implements Builder<Region> {
         textField.textProperty().bind(this.model.directoryPathProperty());
         this.model.setDirectoryPath(Path.of(System.getProperty("user.dir")).toString());
         return textField;
+    }
+
+    private Node createOutputLabel() {
+        Label outputLabel = new Label("");
+        outputLabel.textProperty().bind(this.model.outputLabelProperty());
+        //outputLabel.textFillProperty().bind(labelColor);
+        return outputLabel;
     }
 }

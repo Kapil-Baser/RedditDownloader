@@ -8,6 +8,7 @@ import java.nio.file.Path;
 public class RedditModel {
     private final StringProperty redditURL = new SimpleStringProperty("");
     private final StringProperty directoryPath = new SimpleStringProperty("");
+    private final StringProperty outputLabel = new SimpleStringProperty("");
 
     public RedditModel() {
         this.directoryPath.set(Path.of(System.getProperty("user.dir")).toString());
@@ -35,5 +36,17 @@ public class RedditModel {
 
     public void setDirectoryPath(String directoryPath) {
         this.directoryPath.set(directoryPath);
+    }
+
+    public String getOutputLabel() {
+        return outputLabel.get();
+    }
+
+    public StringProperty outputLabelProperty() {
+        return outputLabel;
+    }
+
+    public void setOutputLabel(String output) {
+        this.outputLabel.set(output);
     }
 }
