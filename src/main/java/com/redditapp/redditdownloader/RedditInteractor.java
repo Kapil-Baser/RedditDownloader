@@ -11,5 +11,7 @@ public class RedditInteractor {
 
     public void start() {
         RedditVideoInfo videoInfo = redditAPI.fetchVideoInfo(this.model.getRedditURL());
+        Downloader downloader = new Downloader();
+        downloader.download(videoInfo, this.model.getDirectoryPath());
     }
 }
