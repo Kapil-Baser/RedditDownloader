@@ -1,6 +1,6 @@
 package com.redditapp.redditdownloader;
 
-public class RedditInteractor {
+public class RedditInteractor implements DownloadCompleteListener{
     private RedditModel model;
     private RedditAPI redditAPI;
 
@@ -13,5 +13,10 @@ public class RedditInteractor {
         RedditVideoInfo videoInfo = redditAPI.fetchVideoInfo(this.model.getRedditURL());
         Downloader downloader = new Downloader();
         downloader.download(videoInfo, this.model.getDirectoryPath());
+    }
+
+    @Override
+    public void onDownloadComplete(boolean shouldMerge) {
+        // Merging
     }
 }
