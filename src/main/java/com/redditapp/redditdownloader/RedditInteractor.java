@@ -11,12 +11,12 @@ public class RedditInteractor implements DownloadCompleteListener{
 
     public void start() {
         RedditVideoInfo videoInfo = redditAPI.fetchVideoInfo(this.model.getRedditURL());
-        Downloader downloader = new Downloader();
+        Downloader downloader = new Downloader(this);
         downloader.download(videoInfo, this.model.getDirectoryPath());
     }
 
     @Override
-    public void onDownloadComplete(boolean shouldMerge) {
+    public void onDownloadComplete(boolean shouldMerge, String videoSavePath, String audioSavePath) {
         // Merging
     }
 }

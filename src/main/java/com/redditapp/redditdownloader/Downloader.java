@@ -7,8 +7,14 @@ import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class Downloader {
+    private final DownloadCompleteListener listener;
+
+    public Downloader(DownloadCompleteListener listener) {
+        this.listener = Objects.requireNonNull(listener, "Should not be null");
+    }
 
     public void download(RedditVideoInfo videoInfo, String savePath) {
         if (videoInfo.hasAudio()) {
@@ -71,6 +77,9 @@ public class Downloader {
         // Download the video and audio file
         downloadFile(videoSavePath, videoURL);
         downloadFile(audioSavePath, audioURL);
+
+        // Notifying that a merging is needed
+        this.listener.onDownloadComplete(true, videoSavePath, audioSavePath);
     }
 
     private void downloadFile(String savePath, URL fileURL) {
