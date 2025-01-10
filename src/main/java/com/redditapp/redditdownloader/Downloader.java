@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class Downloader {
@@ -30,14 +29,6 @@ public class Downloader {
         try {
             return new URI(fileURLString).toURL();
         } catch (MalformedURLException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String getFileName(String fileURL) {
-        try {
-            return Paths.get(new URI(fileURL).getPath()).getFileName().toString();
-        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
@@ -71,8 +62,8 @@ public class Downloader {
         URL audioURL = getURL(audioUrlString);
 
         // Absolute path where files will be saved
-        String videoSavePath = savePath + getFileName(fileURL);
-        String audioSavePath = savePath + getFileName(audioUrlString);
+        String videoSavePath = savePath + Utils.getFileName(fileURL);
+        String audioSavePath = savePath + Utils.getFileName(audioUrlString);
 
         // Download the video and audio file
         downloadFile(videoSavePath, videoURL);

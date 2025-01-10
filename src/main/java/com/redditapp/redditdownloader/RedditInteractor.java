@@ -18,5 +18,8 @@ public class RedditInteractor implements DownloadCompleteListener{
     @Override
     public void onDownloadComplete(boolean shouldMerge, String videoSavePath, String audioSavePath) {
         // Merging
+        if (shouldMerge) {
+
+        }
     }
 }

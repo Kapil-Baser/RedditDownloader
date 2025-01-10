@@ -4,6 +4,7 @@ module com.redditapp.redditdownloader {
     requires Reddit4J.master.d0472546d0;
     requires org.jsoup;
     requires com.google.gson;
+    requires ffmpeg;
 
     opens com.redditapp.redditdownloader to com.google.gson;
     //opens com.redditapp.redditdownloader to javafx.fxml;
