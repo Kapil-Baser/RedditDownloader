@@ -36,7 +36,7 @@ public class RedditAPI {
         // If successful then we acquire the token.
         try {
             this.client.connect();
-            System.out.println("Authenticated successfully, token acquired");
+            //System.out.println("Authenticated successfully, token acquired");
         } catch (IOException | InterruptedException | AuthenticationException e) {
             throw new RuntimeException(e);
         }

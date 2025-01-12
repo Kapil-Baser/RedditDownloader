@@ -77,6 +77,8 @@ public class RedditViewBuilder implements Builder<Region> {
     private Node createDownloadButton() {
         Button button = new Button("Download");
         button.getStyleClass().add("prefWidth-button");
+        // Disable the download button unless there is anything in text field.
+        button.disableProperty().bind(this.model.redditURLProperty().isEmpty());
         button.setOnAction(event -> {
             button.setDisable(true);
             downloadTaskConsumer.accept(() -> Platform.runLater(() -> button.setDisable(false)));
