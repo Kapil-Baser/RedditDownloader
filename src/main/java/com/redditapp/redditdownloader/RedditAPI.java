@@ -107,12 +107,12 @@ public class RedditAPI {
         getMediaInfoFromRedditPost();
 
         return new RedditVideoInfo(
-                (Integer) redditVideoMap.get("bitrate_kbps"),
+                (Double) redditVideoMap.get("bitrate_kbps"),
                 (String) redditVideoMap.get("fallback_url"),
                 (Boolean) redditVideoMap.get("has_audio"),
-                (Integer) redditVideoMap.get("height"),
-                (Integer) redditVideoMap.get("width"),
-                (Integer) redditVideoMap.get("duration"),
+                (Double) redditVideoMap.get("height"),
+                (Double) redditVideoMap.get("width"),
+                (Double) redditVideoMap.get("duration"),
                 (String) redditVideoMap.get("dash_url"),
                 (String) redditVideoMap.get("hls_url"),
                 (boolean) redditVideoMap.get("is_gif")

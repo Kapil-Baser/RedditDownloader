@@ -17,10 +17,10 @@ public class Downloader {
 
     public void download(RedditVideoInfo videoInfo, String savePath) {
         if (videoInfo.hasAudio()) {
-            downloadWithAudio(videoInfo.dashURL(), savePath);
+            downloadWithAudio(videoInfo.fallbackURL(), savePath);
             // Now I will need to merge the two files.
         } else {
-            URL videoURL = getURL(videoInfo.dashURL());
+            URL videoURL = getURL(videoInfo.fallbackURL());
             downloadFile(savePath, videoURL);
         }
     }

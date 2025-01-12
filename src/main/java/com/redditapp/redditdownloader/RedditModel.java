@@ -1,14 +1,18 @@
 package com.redditapp.redditdownloader;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.io.File;
 import java.nio.file.Path;
 
 public class RedditModel {
     private final StringProperty redditURL = new SimpleStringProperty("");
     private final StringProperty directoryPath = new SimpleStringProperty("");
     private final StringProperty outputLabel = new SimpleStringProperty("");
+    private final ObjectProperty<File> selectedDirectory = new SimpleObjectProperty<>();
 
     public RedditModel() {
         this.directoryPath.set(Path.of(System.getProperty("user.dir")).toString());
@@ -48,5 +52,9 @@ public class RedditModel {
 
     public void setOutputLabel(String output) {
         this.outputLabel.set(output);
+    }
+
+    public ObjectProperty<File> selectedDirectoryProperty() {
+        return selectedDirectory;
     }
 }

@@ -1,5 +1,6 @@
 package com.redditapp.redditdownloader;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,21 +10,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Builder;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class RedditViewBuilder implements Builder<Region> {
     private final RedditModel model;
     private final Consumer<Runnable> downloadTaskConsumer;
+    private final Consumer<Stage> browseHandler;
 
-
-
-    public RedditViewBuilder (RedditModel model, Consumer<Runnable> downloadTaskConsumer) {
+    public RedditViewBuilder (RedditModel model, Consumer<Runnable> downloadTaskConsumer, Consumer<Stage> browseHandler) {
         this.model = model;
         this.downloadTaskConsumer = downloadTaskConsumer;
+        this.browseHandler = browseHandler;
     }
 
     @Override
@@ -57,6 +60,10 @@ public class RedditViewBuilder implements Builder<Region> {
     private Node createBrowseButton() {
         Button button = new Button("Browse");
         button.getStyleClass().add("prefWidth-button");
+        button.setOnAction(event -> {
+            Stage stage = (Stage) button.getScene().getWindow();
+            browseHandler.accept(stage);
+        });
         //button.setOnAction(event -> chooseDirectory((Stage) button.getScene().getWindow()));
         return button;
     }
@@ -74,7 +81,12 @@ public class RedditViewBuilder implements Builder<Region> {
         button.getStyleClass().add("prefWidth-button");
         button.setOnAction(event -> {
             button.setDisable(true);
-            downloadTaskConsumer.accept(() -> button.setDisable(false));
+            downloadTaskConsumer.accept(() -> Platform.runLater(
+                    () -> {
+                        button.setDisable(false);
+                        System.out.println("disable button");
+                    }
+            ));
         });
         return button;
     }

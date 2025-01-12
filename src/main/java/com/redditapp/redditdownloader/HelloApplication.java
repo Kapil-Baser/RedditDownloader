@@ -14,7 +14,8 @@ public class HelloApplication extends Application {
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 //        stage.setTitle("Hello!");
 //        stage.setScene(scene);
-        stage.setScene(new Scene(new RedditController().getView()));
+        stage.setScene(new Scene(new RedditController().getView(), 600, 200));
+        stage.setResizable(false);
         stage.show();
     }
 

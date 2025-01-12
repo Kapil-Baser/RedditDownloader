@@ -2,6 +2,7 @@ package com.redditapp.redditdownloader;
 
 import javafx.concurrent.Task;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 import javafx.util.Builder;
 
 public class RedditController {
@@ -11,7 +12,7 @@ public class RedditController {
     public RedditController() {
         RedditModel model = new RedditModel();
         interactor = new RedditInteractor(model);
-        this.viewBuilder = new RedditViewBuilder(model, this::createDownloadTask);
+        this.viewBuilder = new RedditViewBuilder(model, this::createDownloadTask, this::handleBrowse);
     }
 
     private void createDownloadTask(Runnable fetchRedditData) {
@@ -22,9 +23,16 @@ public class RedditController {
                 return null;
             }
         };
+        downloadTask.setOnSucceeded(event -> {
+            fetchRedditData.run();
+        });
         Thread fetchRedditDataThread = new Thread(downloadTask);
         fetchRedditDataThread.setDaemon(true);
         fetchRedditDataThread.start();
+    }
+
+    private void handleBrowse(Stage stage) {
+        interactor.chooseDirectory(stage);
     }
 
     public Region getView() {

@@ -31,8 +31,6 @@ public class Merge {
             var props = ConfigLoader.getProperties();
             FFmpeg ffmpeg = new FFmpeg(props.getProperty("FFMPEG"));
             FFprobe ffprobe = new FFprobe(props.getProperty("FFPROBE"));
-//            FFmpeg ffmpeg = new FFmpeg("C:\\Users\\Kapil\\Downloads\\Programs\\yt-dlp\\ffmpeg.exe");
-//            FFprobe ffprobe = new FFprobe("C:\\Users\\Kapil\\Downloads\\Programs\\yt-dlp\\ffprobe.exe");
             FFmpegBuilder builder = new FFmpegBuilder()
                     .addInput(this.videoFile)
                     .addInput(this.audioFile)
