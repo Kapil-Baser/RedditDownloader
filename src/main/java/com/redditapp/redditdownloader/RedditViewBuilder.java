@@ -15,7 +15,6 @@ import javafx.util.Builder;
 
 import java.nio.file.Path;
 import java.util.Objects;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class RedditViewBuilder implements Builder<Region> {
@@ -64,7 +63,6 @@ public class RedditViewBuilder implements Builder<Region> {
             Stage stage = (Stage) button.getScene().getWindow();
             browseHandler.accept(stage);
         });
-        //button.setOnAction(event -> chooseDirectory((Stage) button.getScene().getWindow()));
         return button;
     }
 
@@ -81,12 +79,7 @@ public class RedditViewBuilder implements Builder<Region> {
         button.getStyleClass().add("prefWidth-button");
         button.setOnAction(event -> {
             button.setDisable(true);
-            downloadTaskConsumer.accept(() -> Platform.runLater(
-                    () -> {
-                        button.setDisable(false);
-                        System.out.println("disable button");
-                    }
-            ));
+            downloadTaskConsumer.accept(() -> Platform.runLater(() -> button.setDisable(false)));
         });
         return button;
     }
@@ -102,7 +95,6 @@ public class RedditViewBuilder implements Builder<Region> {
     private Node createOutputLabel() {
         Label outputLabel = new Label("");
         outputLabel.textProperty().bind(this.model.outputLabelProperty());
-        //outputLabel.textFillProperty().bind(labelColor);
         return outputLabel;
     }
 }
