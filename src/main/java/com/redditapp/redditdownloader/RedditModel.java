@@ -1,6 +1,7 @@
 package com.redditapp.redditdownloader;
 
 import javafx.beans.property.*;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -10,6 +11,7 @@ public class RedditModel {
     private final StringProperty directoryPath = new SimpleStringProperty("");
     private final StringProperty outputLabel = new SimpleStringProperty("");
     private final ObjectProperty<File> selectedDirectory = new SimpleObjectProperty<>();
+    private final ObjectProperty<Color> outputLabelColor = new SimpleObjectProperty<>();
 
     public RedditModel() {
         this.directoryPath.set(Path.of(System.getProperty("user.dir")).toString());
@@ -53,5 +55,13 @@ public class RedditModel {
 
     public ObjectProperty<File> selectedDirectoryProperty() {
         return selectedDirectory;
+    }
+
+    public ObjectProperty<Color> outputLabelColorProperty() {
+        return outputLabelColor;
+    }
+
+    public void setOutputLabelColor(Color color) {
+        this.outputLabelColor.set(color);
     }
 }

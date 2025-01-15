@@ -104,6 +104,10 @@ public class RedditAPI {
         // Extracting the reddit post itself with all the required information
         getRedditPostData(postID);
 
+        if (this.redditPost.getMedia() == null) {
+            return null;
+        }
+
         getMediaInfoFromRedditPost();
 
         return new RedditVideoInfo(

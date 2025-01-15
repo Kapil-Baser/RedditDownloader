@@ -2,6 +2,7 @@ package com.redditapp.redditdownloader;
 
 import javafx.concurrent.Task;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Builder;
 
@@ -15,7 +16,7 @@ public class RedditController {
         this.viewBuilder = new RedditViewBuilder(model, this::createDownloadTask, this::handleBrowse);
     }
 
-    private void createDownloadTask(Runnable fetchRedditData) {
+    private void createDownloadTask() {
         Task<Void> downloadTask = new Task<>() {
             @Override
             protected Void call() {
@@ -23,8 +24,14 @@ public class RedditController {
                 return null;
             }
         };
+
         downloadTask.setOnSucceeded(event -> {
-            fetchRedditData.run();
+            interactor.updateStatus("Download Complete!", Color.GREEN);
+        });
+
+        downloadTask.setOnFailed(event -> {
+            Throwable exception = event.getSource().getException();
+            interactor.updateStatus(exception.getMessage(), Color.RED);
         });
         Thread fetchRedditDataThread = new Thread(downloadTask);
         fetchRedditDataThread.setDaemon(true);

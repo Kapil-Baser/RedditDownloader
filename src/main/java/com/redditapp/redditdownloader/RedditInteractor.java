@@ -1,5 +1,7 @@
 package com.redditapp.redditdownloader;
 
+import javafx.application.Platform;
+import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -18,6 +20,9 @@ public class RedditInteractor implements DownloadCompleteListener{
 
     public void start() {
         RedditVideoInfo videoInfo = redditAPI.fetchVideoInfo(this.model.getRedditURL());
+        if (videoInfo == null) {
+            throw new RuntimeException("Given URL does not contain a video");
+        }
         Downloader downloader = new Downloader(this);
         downloader.download(videoInfo, this.model.getDirectoryPath() + "\\");
     }
@@ -39,5 +44,12 @@ public class RedditInteractor implements DownloadCompleteListener{
         directoryChooser.setInitialDirectory(startDir.toFile());
         Optional<File> selected = Optional.ofNullable(directoryChooser.showDialog(stage));
         selected.ifPresent(value -> this.model.setDirectoryPath((value.toString())));
+    }
+
+    public void updateStatus(String status, Color color) {
+        Platform.runLater(() -> {
+            this.model.setOutputLabelColor(color);
+            this.model.setOutputLabel(status);
+        });
     }
 }

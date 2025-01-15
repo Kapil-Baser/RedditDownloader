@@ -1,6 +1,5 @@
 package com.redditapp.redditdownloader;
 
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,10 +18,10 @@ import java.util.function.Consumer;
 
 public class RedditViewBuilder implements Builder<Region> {
     private final RedditModel model;
-    private final Consumer<Runnable> downloadTaskConsumer;
+    private final Runnable downloadTaskConsumer;
     private final Consumer<Stage> browseHandler;
 
-    public RedditViewBuilder (RedditModel model, Consumer<Runnable> downloadTaskConsumer, Consumer<Stage> browseHandler) {
+    public RedditViewBuilder (RedditModel model, Runnable downloadTaskConsumer, Consumer<Stage> browseHandler) {
         this.model = model;
         this.downloadTaskConsumer = downloadTaskConsumer;
         this.browseHandler = browseHandler;
@@ -80,8 +79,7 @@ public class RedditViewBuilder implements Builder<Region> {
         // Disable the download button unless there is anything in text field.
         button.disableProperty().bind(this.model.redditURLProperty().isEmpty());
         button.setOnAction(event -> {
-            button.setDisable(true);
-            downloadTaskConsumer.accept(() -> Platform.runLater(() -> button.setDisable(false)));
+            downloadTaskConsumer.run();
         });
         return button;
     }
@@ -97,6 +95,7 @@ public class RedditViewBuilder implements Builder<Region> {
     private Node createOutputLabel() {
         Label outputLabel = new Label("");
         outputLabel.textProperty().bind(this.model.outputLabelProperty());
+        outputLabel.textFillProperty().bind(this.model.outputLabelColorProperty());
         return outputLabel;
     }
 }

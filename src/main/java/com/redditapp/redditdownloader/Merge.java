@@ -29,8 +29,10 @@ public class Merge {
     private void mergeFiles() {
         try {
             var props = ConfigLoader.getProperties();
-            FFmpeg ffmpeg = new FFmpeg(props.getProperty("FFMPEG"));
-            FFprobe ffprobe = new FFprobe(props.getProperty("FFPROBE"));
+//            FFmpeg ffmpeg = new FFmpeg(props.getProperty("FFMPEG"));
+//            FFprobe ffprobe = new FFprobe(props.getProperty("FFPROBE"));
+            FFmpeg ffmpeg = new FFmpeg(FFmpeg.DEFAULT_PATH);
+            FFprobe ffprobe = new FFprobe();
             FFmpegBuilder builder = new FFmpegBuilder()
                     .addInput(this.videoFile)
                     .addInput(this.audioFile)
