@@ -29,17 +29,20 @@ public class Merge {
     private void mergeFiles() {
         try {
             var props = ConfigLoader.getProperties();
-//            FFmpeg ffmpeg = new FFmpeg(props.getProperty("FFMPEG"));
-//            FFprobe ffprobe = new FFprobe(props.getProperty("FFPROBE"));
             FFmpeg ffmpeg = new FFmpeg(FFmpeg.DEFAULT_PATH);
             FFprobe ffprobe = new FFprobe();
+
+//            FFmpegBuilder builder = new FFmpegBuilder()
+//                    .addInput(this.videoFile)
+//                    .addInput(this.audioFile)
+//                    .addOutput(this.savePath)
+//                    .addExtraArgs("-c", "copy")
+//                    .done();
             FFmpegBuilder builder = new FFmpegBuilder()
-                    .addInput(this.videoFile)
-                    .addInput(this.audioFile)
+                    .addInput("https://v.redd.it/qzcbb92ymqde1/HLSPlaylist.m3u8?a=1739801290%2CYmM0YTM2ZTE5MGRiNzk2OWQ5ZmQ4N2M0YWY2ZjExYWM5ZjM1N2JiYmZjNDQ4YWRkYTZiODA0YTA4M2JlMjY4Mg%3D%3D&amp;v=1&amp;f=sd")
                     .addOutput(this.savePath)
                     .addExtraArgs("-c", "copy")
                     .done();
-
             FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
             // Run a one-pass encode
             executor.createJob(builder).run();
