@@ -1,4 +1,6 @@
 # Reddit Downloader
+![Screenshot 2025-01-21 205937](https://github.com/user-attachments/assets/9dcecfe4-f4e7-45a6-a69b-0a5be1d59255)
+
 Downloads the video of given reddit URL.
 
 ## Getting started
