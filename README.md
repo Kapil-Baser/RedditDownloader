@@ -15,3 +15,8 @@ You will also need Java Runtime Environment(JRE)
 ### Dependencies
 * For interacting with Reddit API, I used [Reddit4J](https://github.com/masecla22/Reddit4J)
 * For working with FFmpeg, I used [FFmpeg CLI Wrapper for Java](https://github.com/bramp/ffmpeg-cli-wrapper)
+
+## To build
+```bash
+mvn
+```
