@@ -42,10 +42,6 @@ public class RedditAPI {
         }
     }
 
-    private String trimURL(String URL) {
-        return String.join("", URL.split("https://www.reddit.com"));
-    }
-
     private String getJsonAsString(String redditURL) {
         try {
             return this.client.getRawJson(redditURL, Connection.Method.GET, true);
@@ -58,6 +54,8 @@ public class RedditAPI {
         // Find out the correct type of returned Json and then make POJO out of that
         Type listType = new TypeToken<List<RedditListing>>() {}.getType();
         List<RedditListing> lists = new Gson().fromJson(jsonString, listType);
+        String url = lists.getFirst().getData().getChildren().getFirst().getData().getUrl();
+        boolean is_video = lists.getFirst().getData().getChildren().getFirst().getData().isVideo();
         return lists.getFirst().getData().getChildren().getFirst().getData().getName();
     }
 
@@ -95,7 +93,7 @@ public class RedditAPI {
     }
 
     public RedditVideoInfo fetchVideoInfo(String URL) {
-        String redditURL = trimURL(URL);
+        String redditURL = Utils.trimURL(URL);
         String jsonString = getJsonAsString(redditURL);
 
         // Extracting the reddit post ID

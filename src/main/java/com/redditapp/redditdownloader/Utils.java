@@ -13,4 +13,8 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+    public static String trimURL(String URL) {
+        return String.join("", URL.split("https://www.reddit.com"));
+    }
 }
