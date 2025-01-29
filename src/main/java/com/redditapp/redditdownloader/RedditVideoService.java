@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Properties;
 
 public class RedditVideoService {
-    private final RedditAPIClient client;
+    private final RedditAPIProxy client;
     private RedditActualData data;
 
     public RedditVideoService(Properties props) {
-        this.client = new Reddit4JClient(props);
+        this.client = new Reddit4JProxy(props);
     }
 
     private boolean validatePost() {

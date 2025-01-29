@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
-public class Reddit4JClient implements RedditAPIClient{
+public class Reddit4JProxy implements RedditAPIProxy {
     private Reddit4J client;
     private final Properties props;
 
-    public Reddit4JClient(Properties props) {
+    public Reddit4JProxy(Properties props) {
         this.props = props;
         connect();
     }
