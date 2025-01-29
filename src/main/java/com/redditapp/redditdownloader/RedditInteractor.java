@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class RedditInteractor implements DownloadCompleteListener{
     private RedditModel model;
-    private RedditAPI redditAPI;
+    //private RedditAPI redditAPI;
     private RedditVideoService service;
 
     public RedditInteractor(RedditModel model) {
