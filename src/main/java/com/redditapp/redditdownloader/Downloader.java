@@ -21,7 +21,8 @@ public class Downloader {
             // Now I will need to merge the two files.
         } else {
             URL videoURL = getURL(videoInfo.fallbackURL());
-            downloadFile(savePath, videoURL);
+            String videoSavePath = savePath + Utils.getFileName(videoInfo.fallbackURL());
+            downloadFile(videoSavePath, videoURL);
         }
     }
 
