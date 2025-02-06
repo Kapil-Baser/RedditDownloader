@@ -6,6 +6,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -37,6 +39,14 @@ public class RedditInteractor implements DownloadCompleteListener{
             String outputPath = this.model.getDirectoryPath() + "\\" + Utils.getFileName(this.model.getRedditURL()) + ".mp4";
             Merge mergeFiles = new Merge(videoSavePath, audioSavePath, outputPath);
             mergeFiles.merge();
+        } else {
+            // Renaming the file to proper file name of reddit post
+            Path savePath = Path.of(videoSavePath);
+            try {
+                Files.move(savePath, savePath.resolveSibling(Utils.getFileName(this.model.getRedditURL()) + ".mp4"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -23,6 +23,7 @@ public class Downloader {
             URL videoURL = getURL(videoInfo.fallbackURL());
             String videoSavePath = savePath + Utils.getFileName(videoInfo.fallbackURL());
             downloadFile(videoSavePath, videoURL);
+            this.listener.onDownloadComplete(false, videoSavePath, null);
         }
     }
 
