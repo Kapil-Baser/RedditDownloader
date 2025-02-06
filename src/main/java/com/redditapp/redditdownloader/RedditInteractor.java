@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 public class RedditInteractor implements DownloadCompleteListener{
-    private RedditModel model;
+    private final RedditModel model;
     //private RedditAPI redditAPI;
-    private RedditVideoService service;
+    private final RedditVideoService service;
 
     public RedditInteractor(RedditModel model) {
         this.model = model;
