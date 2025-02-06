@@ -20,10 +20,7 @@ public class Downloader {
             downloadWithAudio(videoInfo.fallbackURL(), savePath);
             // Now I will need to merge the two files.
         } else {
-            URL videoURL = getURL(videoInfo.fallbackURL());
-            String videoSavePath = savePath + Utils.getFileName(videoInfo.fallbackURL());
-            downloadFile(videoSavePath, videoURL);
-            this.listener.onDownloadComplete(false, videoSavePath, null);
+            downloadWithoutAudio(videoInfo.fallbackURL(), savePath);
         }
     }
 
@@ -90,5 +87,12 @@ public class Downloader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void downloadWithoutAudio(String videoURL, String savePath) {
+        URL url = getURL(videoURL);
+        String videoSavePath = savePath + Utils.getFileName(videoURL);
+        downloadFile(videoSavePath, url);
+        this.listener.onDownloadComplete(false, videoSavePath, null);
     }
 }
