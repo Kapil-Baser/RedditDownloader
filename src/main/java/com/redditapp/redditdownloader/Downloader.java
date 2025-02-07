@@ -18,7 +18,6 @@ public class Downloader {
     public void download(RedditVideoInfo videoInfo, String savePath) {
         if (videoInfo.hasAudio()) {
             downloadWithAudio(videoInfo.fallbackURL(), savePath);
-            // Now I will need to merge the two files.
         } else {
             downloadWithoutAudio(videoInfo.fallbackURL(), savePath);
         }
