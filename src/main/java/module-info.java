@@ -9,4 +9,6 @@ module com.redditapp.redditdownloader {
     opens com.redditapp.redditdownloader to com.google.gson;
     //opens com.redditapp.redditdownloader to javafx.fxml;
     exports com.redditapp.redditdownloader;
+    exports com.redditapp.redditdownloader.proxies;
+    opens com.redditapp.redditdownloader.proxies to com.google.gson;
 }

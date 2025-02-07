@@ -1,5 +1,7 @@
 package com.redditapp.redditdownloader;
 
+import com.redditapp.redditdownloader.proxies.MergeFilesProxy;
+import com.redditapp.redditdownloader.services.MergeService;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
@@ -37,8 +39,11 @@ public class RedditInteractor implements DownloadCompleteListener{
         // Merging
         if (shouldMerge) {
             String outputPath = this.model.getDirectoryPath() + "\\" + Utils.getFileName(this.model.getRedditURL()) + ".mp4";
-            Merge mergeFiles = new Merge(videoSavePath, audioSavePath, outputPath);
-            mergeFiles.merge();
+//            Merge mergeFiles = new Merge(videoSavePath, audioSavePath, outputPath);
+//            mergeFiles.merge();
+            var videoMerge = new MergeFilesProxy();
+            var mergeService = new MergeService(videoMerge);
+            mergeService.mergeFiles(videoSavePath, audioSavePath, outputPath);
         } else {
             // Renaming the file to proper file name of reddit post
             Path savePath = Path.of(videoSavePath);

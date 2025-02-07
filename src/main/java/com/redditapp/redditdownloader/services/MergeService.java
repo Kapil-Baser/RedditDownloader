@@ -1,11 +1,15 @@
 package com.redditapp.redditdownloader.services;
 
-import com.redditapp.redditdownloader.VideoMerge;
+import com.redditapp.redditdownloader.proxies.VideoMergeProxy;
 
 public class MergeService {
-    private final VideoMerge merge;
+    private final VideoMergeProxy merge;
 
-    public MergeService(VideoMerge videoMerge) {
-        this.merge = videoMerge;
+    public MergeService(VideoMergeProxy videoMergeProxy) {
+        this.merge = videoMergeProxy;
+    }
+
+    public void mergeFiles(String videoFile, String audioFile, String savePath) {
+        merge.merge(videoFile, audioFile, savePath);
     }
 }
