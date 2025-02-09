@@ -1,5 +1,8 @@
-package com.redditapp.redditdownloader;
+package com.redditapp.redditdownloader.services;
 
+import com.redditapp.redditdownloader.*;
+import com.redditapp.redditdownloader.proxies.Reddit4JProxy;
+import com.redditapp.redditdownloader.proxies.RedditAPIProxy;
 import masecla.reddit4j.objects.RedditPost;
 
 import java.util.Map;

@@ -2,6 +2,7 @@ package com.redditapp.redditdownloader;
 
 import com.redditapp.redditdownloader.proxies.MergeFilesProxy;
 import com.redditapp.redditdownloader.services.MergeService;
+import com.redditapp.redditdownloader.services.RedditVideoService;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;

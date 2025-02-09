@@ -1,4 +1,4 @@
-package com.redditapp.redditdownloader;
+package com.redditapp.redditdownloader.proxies;
 
 import masecla.reddit4j.objects.RedditPost;
 

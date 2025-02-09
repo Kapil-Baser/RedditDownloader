@@ -11,4 +11,6 @@ module com.redditapp.redditdownloader {
     exports com.redditapp.redditdownloader;
     exports com.redditapp.redditdownloader.proxies;
     opens com.redditapp.redditdownloader.proxies to com.google.gson;
+    exports com.redditapp.redditdownloader.services;
+    opens com.redditapp.redditdownloader.services to com.google.gson;
 }
