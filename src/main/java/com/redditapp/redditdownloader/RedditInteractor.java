@@ -39,6 +39,8 @@ public class RedditInteractor implements DownloadCompleteListener{
             var videoMerge = new MergeFilesProxy();
             var mergeService = new MergeService(videoMerge);
             mergeService.mergeFiles(videoSavePath, audioSavePath, outputPath);
+            // Deleting the video and audio file after merging
+            Utils.cleanupAfterMerge(videoSavePath, audioSavePath);
         } else {
             // Renaming the file to proper file name of reddit post
             Path savePath = Path.of(videoSavePath);
