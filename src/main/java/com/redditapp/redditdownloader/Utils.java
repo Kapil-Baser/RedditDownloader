@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 
 public class Utils {
 
+    private Utils() {}
+
     public static String getFileName(String fileURL) {
         try {
             return Paths.get(new URI(fileURL).getPath()).getFileName().toString();
