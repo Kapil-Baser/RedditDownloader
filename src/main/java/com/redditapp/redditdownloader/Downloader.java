@@ -53,7 +53,7 @@ public class Downloader {
 
     private void downloadWithAudio(String fileURL, String savePath) {
         // Getting the audio URL with regular expression
-        String audioUrlString = fileURL.replaceAll("DASH_\\d+" , "DASH_AUDIO_128");
+        String audioUrlString = fileURL.replaceAll("CMAF_\\d+" , "CMAF_AUDIO_128");
 
         // Converting the url string to URL object
         URL videoURL = getURL(fileURL);
