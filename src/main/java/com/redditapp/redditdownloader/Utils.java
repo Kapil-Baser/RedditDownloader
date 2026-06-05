@@ -21,8 +21,8 @@ public class Utils {
         }
     }
 
-    public static String trimURL(final String URL) {
-        return String.join("", URL.split("https://www.reddit.com"));
+    public static String trimURL(final String Url) {
+        return String.join("", Url.split("https://www.reddit.com"));
     }
 
     public static void cleanupAfterMerge(String videoFile, String audioFile) {
