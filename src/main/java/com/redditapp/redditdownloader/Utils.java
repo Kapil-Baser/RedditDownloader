@@ -1,5 +1,8 @@
 package com.redditapp.redditdownloader;
 
+import com.redditapp.redditdownloader.exceptions.FileNotFoundException;
+import com.redditapp.redditdownloader.exceptions.InvalidFileURLStringException;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,11 +17,11 @@ public class Utils {
         try {
             return Paths.get(new URI(fileURL).getPath()).getFileName().toString();
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new InvalidFileURLStringException("Given File URL is invalid: " + fileURL, e);
         }
     }
 
-    public static String trimURL(String URL) {
+    public static String trimURL(final String URL) {
         return String.join("", URL.split("https://www.reddit.com"));
     }
 
@@ -27,7 +30,7 @@ public class Utils {
             Files.deleteIfExists(Paths.get(videoFile));
             Files.deleteIfExists(Paths.get(audioFile));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException("Error while trying to delete files after merging", e);
         }
     }
 }
